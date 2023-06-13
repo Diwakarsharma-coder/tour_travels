@@ -31,7 +31,7 @@
 
                             <div class="form-group">
                                     <label for="">Price</label>
-                                    <input type="text" name="price" id="price" class="form-control">
+                                    <input type="text" name="price" id="price" class="form-control" onkeypress="return validateNumber(event)">
                             </div>
 
 
@@ -48,6 +48,7 @@
                             <div class="form-group">
                                     <label for="">Image</label>
                                     <input type="file" name="image[]" id="image" class="form-control" multiple accept="image/*">
+                                    <div class="gallery"></div>
                             </div>
 
 
@@ -63,7 +64,37 @@
 
                 </main>
 
+
 @endsection
 @push("after-scripts")
+<script>
+    var imagesPreview = function(input, placeToInsertImagePreview) {
 
+    if (input.files) {
+        var filesAmount = input.files.length;
+
+        for (i = 0; i < filesAmount; i++) {
+            var reader = new FileReader();
+
+            reader.onload = function(event) {
+                $($.parseHTML('<img width="150px" height="150px" style="border:1px solde red; ">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+            }
+
+            reader.readAsDataURL(input.files[i]);
+        }
+    }
+
+    };
+
+    $('#image').on('change', function() {
+    imagesPreview(this, 'div.gallery');
+    });
+
+
+
+
+};
+
+
+</script>
 @endpush
