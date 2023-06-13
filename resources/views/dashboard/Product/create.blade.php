@@ -37,12 +37,14 @@
 
                             <div class="form-group">
                                     <label for="">Description</label>
-                                    <input type="text" name="description" id="description" class="form-control">
+                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                    {{-- <input type="text" name="description" id="description" class="form-control"> --}}
                             </div>
 
                             <div class="form-group">
                                 <label for="">Policy</label>
-                                <input type="text" name="policy" id="policy" class="form-control">
+                                {{-- <input type="text" name="policy" id="policy" class="form-control"> --}}
+                                <textarea name="policy" id="policy" cols="30" rows="10" class="form-control"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -93,7 +95,6 @@
 
 
 
-};
 
 
 </script>
