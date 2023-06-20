@@ -6,6 +6,9 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -56,12 +59,30 @@ Route::get('/dashboard', function () {
 
 
 Route::get('product',[ProductController::class,'index'])->name('product.index');
+Route::POST('product/anydata',[ProductController::class,'anyData'])->name('product.data');
 Route::get('product/create',[ProductController::class,'create'])->name('product.create');
 Route::post('product/store',[ProductController::class,'store'])->name('product.store');
-Route::get('product/view/{id}',[ProductController::class,'view'])->name('product.view');
+Route::get('product/view/{id}',[ProductController::class,'view'])->name('product.show');
 Route::get('product/edit/{id}',[ProductController::class,'edit'])->name('product.edit');
 Route::post('product/update/{id}',[ProductController::class,'update'])->name('product.update');
 Route::get('product/delete/{id}',[ProductController::class,'delete'])->name('product.delete');
+Route::post('product/updateAll', [ProductController::class, 'ProductStatusUpdate'])->name('product.updateAll');
+
+
+
+
+// Customer Route
+
+Route::get('customer',[CustomerController::class,'index'])->name('customer.index');
+Route::POST('customer/anydata',[CustomerController::class,'anyData'])->name('customer.data');
+Route::get('customer/create',[CustomerController::class,'create'])->name('customer.create');
+Route::post('customer/store',[CustomerController::class,'store'])->name('customer.store');
+Route::get('customer/view/{id}',[CustomerController::class,'view'])->name('customer.show');
+Route::get('customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
+Route::post('customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
+Route::get('customer/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
+Route::post('customer/updateAll', [CustomerController::class, 'CustomerStatusUpdate'])->name('customer.updateAll');
+
 
 
 

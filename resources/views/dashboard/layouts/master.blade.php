@@ -30,13 +30,13 @@
     </div>
     @include('dashboard.layouts.foot')
 
-  <!--   <div class="modal fade" id="alert_confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="alert_confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> --}}
                     <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
                 </div>
                 <div class="modal-body">
@@ -46,7 +46,7 @@
             </div>
         </div>
     </div> -->
-    <!-- <div class="modal fade" id="default_confirm" tabindex="-1" aria-labelledby="exampleModalLabel"
+     <div class="modal fade" id="default_confirm" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -64,12 +64,12 @@
                     <input type="hidden" name="checkbox_type" class="checkbox_type">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button>
+                    {{-- <button type="button" class="btn dark-white p-x-md" data-dismiss="modal">No</button> --}}
                     <button type="button" class="btn btn-danger yes_click">Yes</button>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> 
 </body>
 
 </html>

@@ -16,7 +16,29 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+
+
+Route::get('/about-us', function () {
+    return view('about');
+})->name('about-us');
+
+
+Route::get('/service', function () {
+    return view('service');
+})->name('service');
+
+
+Route::get('/packege', function () {
+    return view('packege');
+})->name('packege');
+
+
+
+Route::get('/contact-us', function () {
+    return view('contact-us');
+})->name('contact-us');
 
 
 Route::middleware('auth')->group(function () {
@@ -24,5 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';

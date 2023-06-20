@@ -8,7 +8,7 @@
 
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Company</h1>
+                        <h1 class="mt-4">Product & Service</h1>
                     </div>
 
                     <div class="row">
