@@ -13,12 +13,12 @@
 
                         <a href="{{ route('customer.create')}}" class="btn btn-primary" style=" position: absolute; right: 0px;">ADD</a>
 
-{{-- 
+                    {{-- 
                     <div class="box-tool">
                     <ul class="nav">
                         <li class="nav-item inline">
                             <a class="btn btn-fw primary" href="{{ route('product.create') }}">
-                                <!-- <i class="brand-icons">&#xe7fe;</i> -->
+                                <i class="brand-icons">&#xe7fe;</i> 
                                 <i class="far fa-plus-square "></i>
                                 &nbsp; Add New
                             </a>

@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title','Dashboard')
+@section('title','Employee Update')
 @push("after-styles")
 
 @endpush
@@ -25,18 +25,7 @@
                         <form action="{{ route('employee.update', $data->id) }}" method="POST" enctype='multipart/form-data'>
                             @csrf
 
-                            <div class="form-group">
-                                    <label for="">Company Name</label>
-                                    <select name="company_id" id="">
-                                    @foreach($company as $com)
-                                        
-                                        <option value="{{$com->id}}">{{$com->name}}</option>
-                                        
-                                        @endforeach
-
-                                    </select>
-                                    
-                            </div>
+                            
 
                             <div class="form-group">
                                     <label for="">First Name</label>
@@ -57,14 +46,42 @@
 
                             <div class="form-group">
                                     <label for="">Phone</label>
-                                    <input type="number" name="phone" id="website" class="form-control"  value="{{$data->phone}}">
+                                    <input type="number"  maxlength="12" name="phone" id="website" class="form-control"  value="{{$data->phone}}">
                             </div>
 
+                            <div class="form-group">
+                                    <label for="">Language</label>
+                                    <input type="text" name="language" id="language" class="form-control"  value="{{$data->language}}">
+                            </div>
                            
+                           <div class="form-group">
+                                <label for="">Facebook Link</label>
+                                <input type="text" name="facebook_link" id="facebook_link" class="form-control" value="{{ $data->facebook_link }}">
+                            </div>
 
 
                             <div class="form-group">
-                                <input type="submit" name="Submit" value="Submit">
+                                <label for="">Instagram link</label>
+                                <input type="text" name="inst_link" id="inst_link" class="form-control" value="{{ $data->inst_link  }}">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Twitter Link</label>
+                                <input type="text" name="twi_link" id="twi_link" class="form-control" value="{{ $data->twi_link }}">
+                            </div>
+
+                           <div class="form-group">
+                                    <label for="">Image</label>
+                                    <input type="file" name="image" id="image" class="form-control"  accept="image/*" onchange="loadFile(event)">
+                                    <input type="hidden" name="old_image" value="{{ $data->image }}">
+                                    <img id="output" width="100px" height="100px" src="{{ asset('employee').'/'.$data->image }}" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" name="Submit" value="Submit">
+                                <a href="{{ route('employee.index') }}" class="btn btn-info">Back</a>
                             </div>
 
                             </form>
@@ -76,5 +93,14 @@
 
 @endsection
 @push("after-scripts")
-  
+  <script>
+      var loadFile = function(event) {
+     var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+        }
+      };
+
+  </script>
 @endpush

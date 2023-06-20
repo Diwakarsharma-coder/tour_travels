@@ -33,7 +33,24 @@
                                     <label for="">Price</label>
                                     <input type="text" name="price" id="price" class="form-control" onkeypress="return validateNumber(event)">
                             </div>
+                            <div class="form-group">
+                                <label for="">Location</label>
+                                <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}">
+                              
+                            </div>
 
+                            <div class="form-group">
+                                <label for="">Day</label>
+                                <input type="Number" name="day" id="day" value="{{ old('day') }}" class="form-control">
+                              
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Person</label>
+                                <input type="Number" value="{{ old('person') }}" name="person" id="person" class="form-control">
+                              
+                            </div>
 
                             <div class="form-group">
                                     <label for="">Description</label>
@@ -46,6 +63,10 @@
                                 {{-- <input type="text" name="policy" id="policy" class="form-control"> --}}
                                 <textarea name="policy" id="policy" cols="30" rows="10" class="form-control"></textarea>
                             </div>
+
+
+                             
+
 
                             <div class="form-group">
                                     <label for="">Image</label>

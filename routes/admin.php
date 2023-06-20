@@ -89,7 +89,11 @@ Route::post('customer/updateAll', [CustomerController::class, 'CustomerStatusUpd
 Route::get('employee',[EmployeeController::class,'index'])->name('employee.index');
 Route::get('employee/create',[EmployeeController::class,'create'])->name('employee.create');
 Route::post('employee/store',[EmployeeController::class,'store'])->name('employee.store');
-Route::get('employee/view/{id}/{com}',[EmployeeController::class,'view'])->name('employee.view');
+Route::get('employee/view/{id}',[EmployeeController::class,'view'])->name('employee.view');
 Route::get('employee/edit/{id}',[EmployeeController::class,'edit'])->name('employee.edit');
 Route::post('employee/update/{id}',[EmployeeController::class,'update'])->name('employee.update');
 Route::get('employee/delete/{id}',[EmployeeController::class,'delete'])->name('employee.delete');
+
+Route::POST('employee/anydata',[EmployeeController::class,'anyData'])->name('employee.data');
+
+Route::post('employee/updateAll', [EmployeeController::class, 'EmployeeStatusUpdate'])->name('employee.updateAll');

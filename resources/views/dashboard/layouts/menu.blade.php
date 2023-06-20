@@ -18,6 +18,12 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                                 Customer
                             </a>
+
+                             <a class="nav-link" href="{{ route('employee.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                                Employee
+                            </a>
+
                             <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
 
 

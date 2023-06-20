@@ -18,12 +18,6 @@
                             @csrf
 
                             <div class="form-group">
-                                    <label for="">Company Name</label>
-                                    <input type="text" name="name" class="form-control" disabled value="{{$company->name}}"/>
-                            </div>
-
-
-                            <div class="form-group">
                                     <label for="">First Name</label>
                                     <input type="text" name="first_name" class="form-control" disabled value="{{$data->first_name}}"/>
                             </div>
@@ -45,11 +39,39 @@
                                     <input disabled type="text" name="website" id="website" class="form-control"  value="{{$data->phone}}">
                             </div>
 
-                           
+                            
+                              <div class="form-group">
+                                    <label for="">Language Guide</label>
+                                    <input disabled type="text" name="website" id="website" class="form-control"  value="{{$data->language}}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Facebook Link</label>
+                                <input disabled type="text" name="facebook_link" id="facebook_link" class="form-control" value="{{ $data->facebook_link }}">
+                            </div>
 
 
                             <div class="form-group">
-                                <a href="{{route('employee.index')}}">Back</a>
+                                <label for="">Instagram link</label>
+                                <input disabled type="text" name="inst_link" id="inst_link" class="form-control" value="{{ $data->inst_link  }}">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Twitter Link</label>
+                                <input disabled type="text" name="twi_link" id="twi_link" class="form-control" value="{{ $data->twi_link }}">
+                            </div>
+
+
+                             <div class="form-group">
+                                    {{-- <label for="">Image</label> --}}
+                                    
+                                    <img id="output" width="100px" height="100px" src="{{ asset('employee').'/'.$data->image }}" />
+                            </div>
+
+
+                            <div class="form-group">
+                                <a class="btn btn-info" href="{{route('employee.index')}}">Back</a>
                             </div>
 
                             </form>

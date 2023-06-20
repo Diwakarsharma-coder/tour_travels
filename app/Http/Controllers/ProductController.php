@@ -29,6 +29,9 @@ class ProductController extends Controller
         'price'=>"required",
         'description'=>"required",
         'image' => 'required',
+        'location' => 'required',
+        'day' => 'required',
+        'person' => 'required',
 
     ]);
 
@@ -48,6 +51,9 @@ class ProductController extends Controller
     $insert->price =$input['price'];
     $insert->description =$input['description'];
     $insert->policy =$input['policy'];
+    $insert->location =$input['location'];
+    $insert->day =$input['day'];
+    $insert->person =$input['person'];
     $insert->image=   implode("|",$images);
     $insert->save();
 
@@ -85,6 +91,9 @@ class ProductController extends Controller
                 'price'=>"required",
                 'description'=>"required",
                 'image' => 'nullable',
+                'location' => 'required',
+                'day' => 'required',
+                'person' => 'required',
 
             ]);
             $input=$request->all();
@@ -105,6 +114,9 @@ class ProductController extends Controller
             $insert->price =$input['price'];
             $insert->description =$input['description'];
             $insert->policy =$input['policy'];
+            $insert->location =$input['location'];
+            $insert->day =$input['day'];
+            $insert->person =$input['person'];
             $insert->image=   $image_data;
             $insert->save();
 

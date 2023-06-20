@@ -74,11 +74,16 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Company</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
+                    <a class="btn btn-link" href="{{ route('about-us') }}">About Us</a>
+                    <a class="btn btn-link" href="{{ route('service') }}">service</a>
+                    <a class="btn btn-link" href="{{ route('packege') }}">Package</a>
+                    <a class="btn btn-link" href="{{ route('contact-us') }}">
+                    Contact Us</a>
+
+                 
+                   {{--  <a class="btn btn-link" href="">Privacy Policy</a>
                     <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
+                    <a class="btn btn-link" href="">FAQs & Help</a> --}}
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Contact</h4>

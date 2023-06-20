@@ -41,14 +41,14 @@
                     <a href="{{ route('service') }}" class="nav-item nav-link <?php  if(basename($_SERVER['REQUEST_URI']) == "service") {echo 'active';} ?>">Services</a>
                     <a href="{{ route('packege') }}" class="nav-item nav-link <?php  if(basename($_SERVER['REQUEST_URI']) == "packege") {echo 'active';} ?>">Packages</a>
                     <div class="nav-item dropdown">
-                    <!-- <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                   <a href="#" class="nav-link dropdown-toggle <?php  if(basename($_SERVER['REQUEST_URI']) == "destination" || basename($_SERVER['REQUEST_URI']) == "booking" || basename($_SERVER['REQUEST_URI']) == "guide" || basename($_SERVER['REQUEST_URI']) == "testimonial") {echo 'active';} ?>" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">
-                        <a href="destination.html" class="dropdown-item">Destination</a>
-                        <a href="#booking.html" class="dropdown-item">Booking</a>
-                        <a href="#team.html" class="dropdown-item">Travel Guides</a>
-                        <a href="#testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="#404.html" class="dropdown-item">404 Page</a>
-                    </div> -->
+                        <a href="{{ route('destination') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "destination") {echo 'active';} ?>">Destination</a>
+                        <a href="{{ route('booking') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "booking") {echo 'active';} ?>">Booking</a>
+                        <a href="{{ route('guide') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "guide") {echo 'active';} ?>">Travel Guides</a>
+                        <a href="{{  route('testimonial') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "testimonial") {echo 'active';} ?>">Testimonial</a>
+                        {{-- <a href="#404.html" class="dropdown-item">404 Page</a> --}}
+                    </div>
                     </div>
                     <a href="{{ route('contact-us') }}" class="nav-item nav-link <?php  if(basename($_SERVER['REQUEST_URI']) == "contact-us") {echo 'active';} ?>">Contact</a>
                 </div>

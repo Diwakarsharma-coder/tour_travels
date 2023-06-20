@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/',[HomeController::class,'index'])->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 
 
@@ -39,6 +41,29 @@ Route::get('/packege', function () {
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
+
+
+
+Route::get('/destination', function () {
+    return view('destination');
+})->name('destination');
+
+
+Route::get('/booking', function () {
+    return view('booking');
+})->name('booking');
+
+
+Route::get('/guide',[HomeController::class,'Travle_guide'])->name('guide');
+
+Route::get('/testimonial', function () {
+    return view('testimonial');
+})->name('testimonial');
+
+
+
+
+
 
 
 Route::middleware('auth')->group(function () {

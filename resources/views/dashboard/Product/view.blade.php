@@ -25,7 +25,24 @@
                                     <label for="">Price</label>
                                     <input disabled type="email" name="email" id="email" class="form-control"  value="{{$data->price}}" >
                             </div>
+                            <div class="form-group">
+                                <label for="">Location</label>
+                                <input disabled type="text" name="location" id="location" class="form-control" value="{{ $data->location }}">
+                              
+                            </div>
 
+                            <div class="form-group">
+                                <label for="">Day</label>
+                                <input disabled type="Number" name="day" id="day" value="{{ $data->day }}" class="form-control">
+                              
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">Person</label>
+                                <input disabled type="Number" value="{{ $data->person }}" name="person" id="person" class="form-control">
+                              
+                            </div>
 
                             <div class="form-group">
                                     <label for="">Descrption</label>
