@@ -50,11 +50,9 @@ Route::middleware('guest')->group(function () {
 });
 
 
+Route::middleware(['auth', 'verified'])->group(function () {
 
-Route::get('/dashboard', function () {
-    return view('dashboard.dashboard');
-
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Customer Route
 
 
 
@@ -71,19 +69,6 @@ Route::post('product/updateAll', [ProductController::class, 'ProductStatusUpdate
 
 
 
-// Customer Route
-
-Route::get('customer',[CustomerController::class,'index'])->name('customer.index');
-Route::POST('customer/anydata',[CustomerController::class,'anyData'])->name('customer.data');
-Route::get('customer/create',[CustomerController::class,'create'])->name('customer.create');
-Route::post('customer/store',[CustomerController::class,'store'])->name('customer.store');
-Route::get('customer/view/{id}',[CustomerController::class,'view'])->name('customer.show');
-Route::get('customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
-Route::post('customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
-Route::get('customer/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
-Route::post('customer/updateAll', [CustomerController::class, 'CustomerStatusUpdate'])->name('customer.updateAll');
-
-
 
 
 Route::get('employee',[EmployeeController::class,'index'])->name('employee.index');
@@ -97,3 +82,23 @@ Route::get('employee/delete/{id}',[EmployeeController::class,'delete'])->name('e
 Route::POST('employee/anydata',[EmployeeController::class,'anyData'])->name('employee.data');
 
 Route::post('employee/updateAll', [EmployeeController::class, 'EmployeeStatusUpdate'])->name('employee.updateAll');
+
+
+Route::get('customer',[CustomerController::class,'index'])->name('customer.index');
+Route::POST('customer/anydata',[CustomerController::class,'anyData'])->name('customer.data');
+Route::get('customer/create',[CustomerController::class,'create'])->name('customer.create');
+Route::post('customer/store',[CustomerController::class,'store'])->name('customer.store');
+Route::get('customer/view/{id}',[CustomerController::class,'view'])->name('customer.show');
+Route::get('customer/edit/{id}',[CustomerController::class,'edit'])->name('customer.edit');
+Route::post('customer/update/{id}',[CustomerController::class,'update'])->name('customer.update');
+Route::get('customer/delete/{id}',[CustomerController::class,'delete'])->name('customer.delete');
+Route::post('customer/updateAll', [CustomerController::class, 'CustomerStatusUpdate'])->name('customer.updateAll');
+
+
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard.dashboard');
+
+})->middleware(['auth', 'verified'])->name('dashboard');
+

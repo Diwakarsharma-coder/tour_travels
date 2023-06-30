@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+Route::POST('/booking-details/',[HomeController::class,'booking'])->name('booking_details');
+
+Route::get('/booking_details_page/{per}/',[HomeController::class,'booking_details_page'])->name('booking_details_page');
+
+
+Route::get('product-details/{id}',[HomeController::class,'product_details'])->name('product_details');
+
+Route::post('/book-now',[HomeController::class,'Book_now'])->name('booknow');
+
+Route::get(base64_encode('/success/').'{id}',[HomeController::class,'success'])->name('success');
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');
@@ -32,9 +46,7 @@ Route::get('/service', function () {
 })->name('service');
 
 
-Route::get('/packege', function () {
-    return view('packege');
-})->name('packege');
+Route::get('/packege', [HomeController::class,'packages'])->name('packege');
 
 
 
@@ -44,9 +56,7 @@ Route::get('/contact-us', function () {
 
 
 
-Route::get('/destination', function () {
-    return view('destination');
-})->name('destination');
+Route::get('/destination',[HomeController::class,"destination"])->name('destination');
 
 
 Route::get('/booking', function () {
@@ -74,4 +84,25 @@ Route::middleware('auth')->group(function () {
 
 
 
+// mlwccoqfjhttcbjp
+
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+    \Mail::to('diwakarsharma923@gmail.com')->send(new \App\Mail\MyTestMail($details));
+   
+    dd("Email is Sent.");
+});
+
+
+
+
 require __DIR__.'/auth.php';
+
+
+// rzp_test_LEYYuERprlwZCs
+// 3RRi8C4j1wRdsJI3yKH66EG6

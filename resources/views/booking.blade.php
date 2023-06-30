@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Booking')
 @push("after-styles")
 
 @endpush
@@ -84,7 +84,7 @@
                         <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                         <a class="btn btn-outline-light py-3 px-5 mt-2" href="">Read More</a>
                     </div>
-                    <div class="col-md-6">
+                   {{--  <div class="col-md-6">
                         <h1 class="text-white mb-4">Book A Tour</h1>
                         <form>
                             <div class="row g-3">
@@ -127,7 +127,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

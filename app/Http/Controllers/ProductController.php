@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Employee;
 use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
@@ -17,7 +18,9 @@ class ProductController extends Controller
 
    public function create()
    {
-    return view('dashboard.product.create');
+
+       return view('dashboard.product.create');
+
    }
 
 
@@ -27,15 +30,21 @@ class ProductController extends Controller
     $validated = $request->validate([
         'title'=>"required",
         'price'=>"required",
-        'description'=>"required",
-        'image' => 'required',
         'location' => 'required',
         'day' => 'required',
         'person' => 'required',
+        'included' => 'required',
+        'guider' => 'required',
+        'cancel' => 'required',
+        'expect' => 'required',
+        'image' => 'required',
+        'description'=>"required",
+        'policy'=>"required",
 
     ]);
 
     $input=$request->all();
+    // dd($input);
     $images=array();
     if($files=$request->file('image')){
         foreach($files as $file){
@@ -54,6 +63,10 @@ class ProductController extends Controller
     $insert->location =$input['location'];
     $insert->day =$input['day'];
     $insert->person =$input['person'];
+    $insert->guider =$input['guider'];
+    $insert->cancel =$input['cancel'];
+    $insert->included =$input['included'];
+    $insert->expect =$input['expect'];
     $insert->image=   implode("|",$images);
     $insert->save();
 
@@ -87,13 +100,18 @@ class ProductController extends Controller
    {
             $insert = Product::find($id);
             $validated = $request->validate([
-                'title'=>"required",
+               'title'=>"required",
                 'price'=>"required",
-                'description'=>"required",
-                'image' => 'nullable',
                 'location' => 'required',
                 'day' => 'required',
                 'person' => 'required',
+                'guider' => 'required',
+                'cancel' => 'required',
+                'included' => 'required',
+                'expect' => 'required',
+                'image' => 'nullable',
+                'description'=>"required",
+                'policy'=>"required",
 
             ]);
             $input=$request->all();
@@ -117,6 +135,10 @@ class ProductController extends Controller
             $insert->location =$input['location'];
             $insert->day =$input['day'];
             $insert->person =$input['person'];
+            $insert->guider =$input['guider'];
+            $insert->cancel =$input['cancel'];
+            $insert->included =$input['included'];
+            $insert->expect =$input['expect'];
             $insert->image=   $image_data;
             $insert->save();
 

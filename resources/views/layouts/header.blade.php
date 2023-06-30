@@ -27,7 +27,7 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-            <a href="" class="navbar-brand p-0">
+            <a href="{{ route('home') }}" class="navbar-brand p-0">
                 <!-- <h1 class="text-primary m-0"><i class="fa fa-map-marker-alt me-3"></i>Tourist</h1> -->
                 <img src="{{ asset('frontend/img/logo.png') }}" alt="Logo" style="padding: 0px;">
             </a>
@@ -46,13 +46,13 @@
                         <a href="{{ route('destination') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "destination") {echo 'active';} ?>">Destination</a>
                         <a href="{{ route('booking') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "booking") {echo 'active';} ?>">Booking</a>
                         <a href="{{ route('guide') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "guide") {echo 'active';} ?>">Travel Guides</a>
-                        <a href="{{  route('testimonial') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "testimonial") {echo 'active';} ?>">Testimonial</a>
+                        {{-- <a href="{{  route('testimonial') }}" class="dropdown-item <?php  if(basename($_SERVER['REQUEST_URI']) == "testimonial") {echo 'active';} ?>">Testimonial</a> --}}
                         {{-- <a href="#404.html" class="dropdown-item">404 Page</a> --}}
                     </div>
                     </div>
                     <a href="{{ route('contact-us') }}" class="nav-item nav-link <?php  if(basename($_SERVER['REQUEST_URI']) == "contact-us") {echo 'active';} ?>">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                {{-- <a href="{{ route('register') }}" class="btn btn-primary rounded-pill py-2 px-4">Register</a> --}}
             </div>
         </nav>
 

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Testimonial')
 @push("after-styles")
 
 @endpush

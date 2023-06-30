@@ -19,6 +19,8 @@
        <link href="{{ asset('dashboard/DataTables/datatables.min.css')}} " rel="stylesheet"/>
        <link href="{{ asset('dashboard/bootstrap/css/bootstrap.min.css')}} " rel="stylesheet"/>
  
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('ckeditor/styles.js') }}"></script>
 
 
 

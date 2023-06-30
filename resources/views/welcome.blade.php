@@ -59,7 +59,7 @@
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>24/7 Service</p>
                         </div>
                     </div>
-                    <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                    <a class="btn btn-primary py-3 px-5 mt-2" href="{{ route('about-us') }}">Read More</a>
                 </div>
             </div>
         </div>
@@ -164,18 +164,24 @@
                 <div class="col-lg-7 col-md-6">
                     <div class="row g-3">
                         @foreach($product0 as $val)
+                            @php
+                            $array = explode("|", $val->image);
+                            @endphp
                             <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
-                                <a class="position-relative d-block overflow-hidden" href="">
-                                    <img class="img-fluid" src="{{ asset('product').'/'. $val->image }}" alt="">
+                                <a class="position-relative d-block overflow-hidden" href="{{ route('product_details',$val->id) }}">
+                                    <img class="img-fluid" style="width: 646px; height:242px" src="{{ asset('product').'/'. $array[0] }}" alt="">
                                     {{-- <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">30% OFF</div> --}}
                                     <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">{{ $val->location }}</div>
                                 </a>
                             </div>
                         @endforeach
                         @foreach($product1 as $val)
+                         @php
+                            $array = explode("|", $val->image);
+                            @endphp
                         <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
-                            <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{ asset('product').'/'. $val->image }}" alt="">
+                            <a class="position-relative d-block overflow-hidden" href="{{ route('product_details',$val->id) }}">
+                                <img class="img-fluid" style="width: 314px; height:209px"  src="{{ asset('product').'/'. $array[0] }}" alt="">
                                 {{-- <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">25% OFF</div> --}}
                                 <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">{{ $val->location }}</div>
                             </a>
@@ -183,9 +189,12 @@
                         @endforeach
                         
                         @foreach($product2 as $val)
+                            @php
+                            $array = explode("|", $val->image);
+                            @endphp
                             <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
-                                <a class="position-relative d-block overflow-hidden" href="">
-                                    <img class="img-fluid" src="{{ asset('product').'/'. $val->image }}" alt="">
+                                <a class="position-relative d-block overflow-hidden" href="{{ route('product_details',$val->id) }}">
+                                    <img class="img-fluid" style="width: 314px; height:209px" src="{{ asset('product').'/'. $array[0] }}" alt="">
                                     {{-- <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">35% OFF</div> --}}
                                     <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">{{ $val->location }}</div>
                                 </a>
@@ -195,9 +204,12 @@
                     </div>
                 </div>
                 @foreach($product3 as $val)
+                 @php
+                    $array = explode("|", $val->image);
+                @endphp
                 <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
-                    <a class="position-relative d-block h-100 overflow-hidden" href="">
-                        <img class="img-fluid position-absolute w-100 h-100" src="{{ asset('product').'/'. $val->image }}" alt="" style="object-fit: cover;">
+                    <a class="position-relative d-block h-100 overflow-hidden" href="{{ route('product_details',$val->id) }}">
+                        <img class="img-fluid position-absolute w-100 h-100" src="{{ asset('product').'/'. $array[0] }}"  style=" height:467px" alt="" style="object-fit: cover;">
                         {{-- <div class="bg-white text-danger fw-bold position-absolute top-0 start-0 m-3 py-1 px-2">20% OFF</div> --}}
                         <div class="bg-white text-primary fw-bold position-absolute bottom-0 end-0 m-3 py-1 px-2">{{ $val->location }}</div>
                     </a>
@@ -220,10 +232,13 @@
             </div>
             <div class="row g-4 justify-content-center">
                 @foreach($awesomePackages as $data)
+                    @php
+                     $array = explode("|", $data->image);
+                    @endphp
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="package-item">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('product').'/'.$data->image}}" alt="">
+                            <img class="img-fluid" style="height:237px" src="{{ asset('product').'/'.$array[0] }}" alt="">
                         </div>
                         <div class="d-flex border-bottom">
                             <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $data->location }}</small>
@@ -231,7 +246,7 @@
                             <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>{{ $data->person }} Person</small>
                         </div>
                         <div class="text-center p-4">
-                            <h3 class="mb-0">Rs. {{ $data->price }}</h3>
+                            <h3 class="mb-0">₹ {{ $data->price }}</h3>
                             <div class="mb-3">
                                 <small class="fa fa-star text-primary"></small>
                                 <small class="fa fa-star text-primary"></small>
@@ -242,7 +257,7 @@
                             <p>{{ $data->title }}</p>
                             <div class="d-flex justify-content-center mb-2">
                                 {{-- <a href="#" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a> --}}
-                                <a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 30px 30px 30px 30px;">Book Now</a>
+                                <a href="{{ route('product_details',$data->id) }}" class="btn btn-sm btn-primary px-3" style="border-radius: 30px 30px 30px 30px;">Book Now</a>
                             </div>
                         </div>
                     </div>
@@ -267,7 +282,7 @@
                         <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                         <a class="btn btn-outline-light py-3 px-5 mt-2" href="">Read More</a>
                     </div>
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <h1 class="text-white mb-4">Book A Tour</h1>
                         <form>
                             <div class="row g-3">
@@ -310,7 +325,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -377,7 +392,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{ asset('employee').'/'.$value->image}}" alt="">
+                            <img class="img-fluid"  style="height: 261px" src="{{ asset('employee').'/'.$value->image}}" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
                             <a class="btn btn-square mx-1" target="_blank" href="{{ $value->facebook_link }}"><i class="fab fa-facebook-f"></i></a>

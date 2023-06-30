@@ -35,6 +35,16 @@
 <!-- Template Stylesheet -->
 <link href="{{ asset('frontend/css/style.css')}}" rel="stylesheet">
 
+{{-- <link href="{{ asset('frontend/datepicker/css/cdnjs.cloudflare.com_ajax_libs_bootstrap-datetimepicker_3.1.3_css_bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
+<link href="{{ asset('frontend/datepicker/css/maxcdn.bootstrapcdn.com_bootstrap_3.3.2_css_bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{ asset('frontend/datepicker/css/maxcdn.bootstrapcdn.com_font-awesome_4.3.0_css_font-awesome.min.css')}}" rel="stylesheet"> --}}
+
+{{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com_bootstrap_3.3.2_css_bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com_font-awesome_4.3.0_css_font-awesome.min.css" rel="stylesheet">
+ --}}
+ <link rel="stylesheet"
+        href="{{ asset('frontend/css/datepicker_1.9.0_css_bootstrap-datepicker.min.css') }}" />
         
 
 {{-- @stack('after-styles') --}}

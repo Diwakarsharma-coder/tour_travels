@@ -42,7 +42,7 @@
                                 <option value="no">Action</option>
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
-                                {{-- <option value="2">Delete</option> --}}
+                                <option value="2">Delete</option> 
                             </select>
                             <button type="submit" id="submit_all" class="btn btn-apply">Apply</button>
                         </div>
