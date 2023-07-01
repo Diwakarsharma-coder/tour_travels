@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6 m-5">
+                        <div class="col-10 m-5">
 
                         <form >
                             @csrf
@@ -43,6 +43,38 @@
                                 <input disabled type="Number" value="{{ $data->person }}" name="person" id="person" class="form-control">
                               
                             </div>
+
+                             <div class="form-group">
+                        <strong for="">Price</strong>
+
+                            <table class="table border price_table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Title</th>
+                                  <th scope="col">Price</th>
+                                  <th scope="col">Description</th>
+                                  {{-- <th><a id="add-new-btn" class="btn btn-primary" >+</a></th> --}}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @foreach($price_detail as $i => $val)
+                                    <tr>
+                                        <input type="hidden" name="price_detail_id[]" value="{{ $val->id }}">
+                                        <td class="measurement_box"><input type="text" disabled name="price_title[]" value="{{ $val->price_title }}" class="form-control"></td>
+                                        <td class="measurement_box"><input type="text" disabled name="price_value[]" value="{{ $val->price_value }}" class="form-control"></td>
+                                        <td class="measurement_box"><input type="text" disabled name="price_desc[]" value="{{ $val->price_desc }}" class="form-control"></td>
+                                       
+
+                                        
+                                    </tr> 
+                                @endforeach
+                                
+                                
+                              </tbody>
+                            </table>
+
+                    </div>
+
 
                             <div class="form-group">
                                 <strong>Guider</strong>

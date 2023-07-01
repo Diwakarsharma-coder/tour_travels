@@ -99,6 +99,8 @@ Route::get('send-mail', function () {
 });
 
 
+Route::get('form',[HomeController::class,'form'])->name('form');
+Route::post('make-order',[HomeController::class,'make_order'])->name('make-order');
 
 
 require __DIR__.'/auth.php';

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Employee;
+use App\Models\Price_detail;
 use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
@@ -70,6 +71,27 @@ class ProductController extends Controller
     $insert->image=   implode("|",$images);
     $insert->save();
 
+
+
+    $price_title = $request->price_title;
+    $price_value = $request->price_value;
+    $price_desc = $request->price_desc;
+            
+    // dd($price_title);
+    foreach($price_title as $i => $val)
+     {
+        $new  = new Price_detail();
+        $new->product_id = $insert->id; 
+        $new->price_title = $price_title[$i]; 
+        $new->price_value = $price_value[$i]; 
+        $new->price_desc = $price_desc[$i]; 
+        $new->save();
+        
+     }   
+
+
+
+
     return  redirect()->route('product.index')->with('success','Create success');
 
    }
@@ -78,8 +100,8 @@ class ProductController extends Controller
    {
 
     $data = Product::find($id);
-
-    return view('dashboard.product.view', compact('data'));
+ $price_detail = Price_detail::where('product_id',$id)->where('status',1)->get();
+    return view('dashboard.product.view', compact('data','price_detail'));
 
    }
 
@@ -88,8 +110,9 @@ class ProductController extends Controller
    {
 
     $data = Product::find($id);
-
-    return view('dashboard.product.edit', compact('data'));
+    $price_detail = Price_detail::where('product_id',$id)->where('status',1)->get();
+    // dd($price_detail);
+    return view('dashboard.product.edit', compact('data', 'price_detail'));
 
    }
 
@@ -98,6 +121,14 @@ class ProductController extends Controller
 
    public function update($id,Request $request)
    {
+
+        
+
+           
+        // dd($request->all());
+        // exit;
+
+
             $insert = Product::find($id);
             $validated = $request->validate([
                'title'=>"required",
@@ -113,7 +144,72 @@ class ProductController extends Controller
                 'description'=>"required",
                 'policy'=>"required",
 
+                // "price_title.*" => 'required|string|min:3',
+                // "price_value.*" => 'required|integer|min:1',
+                // "price_desc.*" => "required|string"
+
+
             ]);
+
+             $price_title = $request->price_title;
+            $price_value = $request->price_value;
+            $price_desc = $request->price_desc;
+            $price_detail_id = $request->price_detail_id;
+            // dd($request->price_detail_id);
+            // exit;
+            $Data = Price_detail::where('product_id',$id)->get();
+
+            foreach($Data as $i => $val)
+            {
+
+                echo $val->id;
+                // echo $price_detail_id[$i];
+                $find1 = Price_detail::find($val->id);
+                $find1->status = 2; 
+                $find1->save();
+            } 
+
+            if(!empty($price_detail_id ))
+            {
+                 foreach($price_detail_id as $i => $val)
+                    {
+
+                        // echo $price_detail_id[$i];
+                        $find = Price_detail::find($price_detail_id[$i]);
+                        // if(!empty($find)){
+                            $find->price_title = $price_title[$i]; 
+                            $find->price_value = $price_value[$i]; 
+                            $find->price_desc = $price_desc[$i]; 
+                            $find->status = 1; 
+                            $find->save();
+                        // }   
+                    }  
+            }
+           
+
+
+            $price_title2 = $request->price_title2;
+            $price_value2 = $request->price_value2;
+            $price_desc2 = $request->price_desc2;
+
+            if(!empty($price_title2))
+            {
+             foreach($price_title2 as $i => $val)
+             {
+
+                    $new  = new Price_detail();
+                    $new->product_id = $id; 
+                    $new->price_title = $price_title2[$i]; 
+                    $new->price_value = $price_value2[$i]; 
+                    $new->price_desc = $price_desc2[$i]; 
+                    $new->save();
+             } 
+            }
+            
+
+            
+
+
             $input=$request->all();
             $images=array();
             $image_data = $input['old_image'];

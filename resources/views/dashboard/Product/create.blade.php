@@ -5,14 +5,18 @@
 @endpush
 @section('content')
 
-
+<style>
+    .error{
+        color: red;
+    }
+</style>
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Product & Service</h1>
                     </div>
 
                     <div class="row">
-                        <div class="col-6 m-5">
+                        <div class="col-10 m-5">
                         @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -22,7 +26,7 @@
                             </ul>
                         </div>
                     @endif
-                        <form action="{{ route('product.store') }}" method="POST" enctype='multipart/form-data'>
+                        <form action="{{ route('product.store') }}" method="POST" enctype='multipart/form-data' id="product_service">
                             @csrf
                             <div class="form-group">
                                     <strong for="">Title</strong>
@@ -51,6 +55,32 @@
                                 <input type="Number" value="{{ old('person') }}" name="person" id="person" class="form-control">
                               
                             </div>
+
+
+                            <div class="form-group">
+                                    <strong for="">Price </strong>
+
+                                <table class="table border price_table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Title</th>
+                                      <th scope="col">Price</th>
+                                      <th scope="col">Description</th>
+                                      <th><a id="add-new-btn" class="btn btn-primary" >+</a></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        <tr>
+                                            <td class="measurement_box"><input type="text" name="price_title[]" value="{{ old('price_title[]') }}" class="form-control"></td>
+                                            <td class="measurement_box"><input type="text" name="price_value[]" value="{{ old('price_value[]') }}" class="form-control"></td>
+                                            <td class="measurement_box"><input type="text" name="price_desc[]" value="{{ old('price_desc[]') }}" class="form-control"></td>
+                                        </tr>
+                                    
+                                  </tbody>
+                                </table>
+
+                                </div>
+
 
                             <div class="form-group">
                                 <strong>Guider</strong>
@@ -124,7 +154,44 @@
 
 @endsection
 @push("after-scripts")
+  
+  <script src="{{ asset('frontend/js/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_additional-methods.min.js') }}"></script>
+<script src="{{ asset('frontend/js/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_jquery.validate.min.js') }}"></script>
 <script>
+
+     $("#add-new-btn").on("click", function(e){
+      //calling method to add new row
+        e.preventDefault();
+      addNewRow();
+    });
+
+     function addNewRow(){
+      var rowHtml='<tr>'
+      +'<td class="measurement_box"><input class="form-control" name="price_title[]" type="text" /></td>'
+      +'<td class="measurement_box"><input class="form-control" name="price_value[]" type="text" /></td>'
+      +'<td class="measurement_box"><input class="form-control" name="price_desc[]" type="text" /></td>'
+      +'<td><input type="button" value="-" class="btn btn-danger" onclick="deleteRow(this)" /></td></tr>';
+      $(".price_table").append(rowHtml);
+    }
+
+
+     function deleteRow(ele){
+      var table = $('.price_table')[0];
+      var rowCount = table.rows.length;
+      if(rowCount <= 1){
+        alert("There is no row available to delete!");
+        return;
+      }
+      if(ele){
+        //delete specific row
+        $(ele).parent().parent().remove();
+      }
+      else{
+        //delete last row
+        table.deleteRow(rowCount-1);
+      }
+    }
+
     var imagesPreview = function(input, placeToInsertImagePreview) {
 
     if (input.files) {
@@ -286,4 +353,92 @@
              
         </script>
 
+ <script>
+     $.validator.addMethod("length_width_pice", function(value, element) {
+                    var flag = true;
+
+                    $("[name^=price_title]").each(function(i, j) {
+                        $(this).parent('.measurement_box').find('small.error').remove();
+                        $(this).parent('.measurement_box').find('small.error').remove();
+                        if ($.trim($(this).val()) == '') {
+                            flag = false;
+
+                            $(this).parent('.measurement_box').append('<small  id="len' +
+                                i +
+                                '-error" class="error">Please enter price title.</small>');
+                        }
+                    });
+
+                    $("[name^=price_value]").each(function(i, j) {
+                        $(this).parent('.measurement_box').find('small.error').remove();
+                        $(this).parent('.measurement_box').find('small.error').remove();
+                        if ($.trim($(this).val()) == '') {
+                            flag = false;
+
+                            $(this).parent('.measurement_box').append('<small  id="len' +
+                                i +
+                                '-error" class="error">Please enter price value.</small>');
+                        }
+                    });
+
+
+                    $("[name^=price_desc]").each(function(i, j) {
+                        $(this).parent('.measurement_box').find('small.error').remove();
+                        $(this).parent('.measurement_box').find('small.error').remove();
+                        if ($.trim($(this).val()) == '') {
+                            flag = false;
+
+                            $(this).parent('.measurement_box').append('<small  id="len' +
+                                i +
+                                '-error" class="error">Please enter price description.</small>');
+                        }
+                    });
+
+
+                    return flag;
+                }, "");
+
+   $("#product_service").validate({
+            ignore: [],
+            rules: {
+                 
+                "price_title[]": {
+                    length_width_pice:true
+                },
+                "price_value[]": {
+                    length_width_pice:true
+                },
+                "price_desc[]": {
+                    length_width_pice:true
+                },
+
+               
+            },
+            messages: {
+              
+                
+               
+               
+
+            },
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            submitHandler: function (form) {
+              // console.log('test');
+              form.submit();
+                        
+            }
+
+        });
+
+   
+
+
+</script> 
 @endpush

@@ -13,6 +13,10 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Price_detail;
+
+use Razorpay\Api\Api;
+
 
 class HomeController extends Controller
 {
@@ -49,9 +53,12 @@ class HomeController extends Controller
 
      $awesomePackages = Product::where('status', '=', '1')->limit(4)->orderBy('id', 'desc')->get();
 
-     // dd($product->image);
+     $price_detail = Price_detail::where('product_id',$id)->where('status',1)->get();
 
-     return view('product-details', compact('product','awesomePackages'));
+
+     // dd($product);
+
+     return view('product-details', compact('product','awesomePackages','price_detail'));
 
    }
 
@@ -171,4 +178,33 @@ class HomeController extends Controller
        $product = Product::where('status', '!=', '2')->orderBy('id', 'desc')->get();
       return view('destination', compact('product'));
    }
+
+
+   public function form()
+   {
+      return view('payment');
+   }
+   public function make_order(Request $request)
+   {
+      $api_key = "rzp_test_X3XAEKMbiYxv5I";
+      $api_secret = "6AsRIjYYmfn7BZ3hZlOtBHGv";
+
+      $api = new Api($api_key, $api_secret);
+      $order_id = rand(111111, 999999);
+     $orderData = [
+         'receipt'         => 'rcptid_11',
+         'amount'          => $request->amount * 100, // 39900 rupees in paise
+         'currency'        => 'INR',
+         'notes'=>[
+            'order_id' => $order_id,
+         ],
+      ];
+
+      $razorpayOrder = $api->order->create($orderData);
+      return view('payment-details', compact('razorpayOrder','order_id'));
+      // dd($razorpayOrder);
+
+   }
+
+
 }

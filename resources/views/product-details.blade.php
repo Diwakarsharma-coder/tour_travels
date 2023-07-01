@@ -30,10 +30,14 @@
 <section class="py-5">
   <div class="container">
     <div class="row gx-5">
+      <h4 class="title text-dark">
+            {{ $product->title }}
+          </h4>
       <div class="col-lg-6">
         @php
           $array = explode("|", $product->image);
         @endphp
+
         <div class="border rounded-4 mb-3 d-flex justify-content-center">
           <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="{{ asset('product').'/'.$array[0] }}">
             <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ asset('product').'/'.$array[0] }}" />
@@ -48,9 +52,9 @@
           
           
         </div>
-        <h4 class="title text-dark">
+        {{-- <h4 class="title text-dark">
             {{ $product->title }}
-          </h4>
+          </h4> --}}
           <div class="mb-3">
             {{-- <span class="h5">₹ {{ $product->price }}</span> --}}
             {{-- <span class="text-muted">/per box</span> --}}
@@ -111,7 +115,7 @@
           </div> 
           <a id="booknow4" href="{{ route('booking_details_page',$product->id) }}" class="btn btn-primary shadow-0" style="border-radius: 30px 30px 30px 30px;"> Check Availability </a>
           <br>
-          <strong>Free cancellation</strong>
+          @if($product->cancel)<strong>Free cancellation</strong>@endif
           </form>
           {{-- <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a> --}}
           {{-- <a href="#" class="btn btn-light border border-secondary py-2 icon-hover px-3"> <i class="me-1 fa fa-heart fa-lg"></i> Save </a> --}}
@@ -120,19 +124,47 @@
 
     </div>
     
-    <div class="row gx-5 bo">
-        <div class="col-8 border">
-          Option 
-          tilte
-          des
-          daasd
-        </div>
-        <div class="col-4 border">
-          <h4>45545</h4>
-          <p>1 person X 3213.3</p>
-          <a href="" class="btn btn-primary">Book Now</a>
-        </div>
-    </div>
+    @foreach($price_detail as $i => $val)
+       <div class="row gx-5 m-1">
+        {{--    --}}
+
+          <div class="accordion" id="accordionExample{{ $i }}">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button <?php if($i==0){ echo 'collapsed';}?> " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ $i }}" aria-expanded="true" aria-controls="collapseOne{{ $i }}">
+                <h5>{{ $val->price_title }}</h5>
+              </button>
+            </h2>
+            <div id="collapseOne{{ $i }}" class="accordion-collapse collapse <?php if($i==0){ echo 'show';}?> " data-bs-parent="#accordionExample{{ $i }}">
+              <div class="accordion-body">
+                <div class="row gx-4 ">
+                    <div class="col-7 border ">
+                      <strong> Option {{ $i+1 }}</strong>
+                      <h3>{{ $val->price_title }}</h3>
+                      <p>{{ $val->price_desc }}</p>
+                    </div>
+                    <div class="col-5 border flex-column d-flex align-items-end ">
+                      <div>
+                      <h4> ₹ {{ $val->price_value }}</h4>
+                          
+                      </div>
+                      
+                      <a href="" class="btn btn-primary ">Book Now</a>
+
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+  
+</div>
+      </div>
+
+    @endforeach      
+   
+
+
 
     <div class="row gx-5">
         
