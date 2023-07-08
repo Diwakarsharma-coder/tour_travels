@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title','Product & Service')
+@section('title','Booking Details')
 @push("after-styles")
 
 @endpush
@@ -8,44 +8,15 @@
 
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Product & Service</h1>
+                        <h1 class="mt-4">Booking Details</h1>
                     </div>
 
-                        <a href="{{ route('product.create')}}" class="btn btn-primary" style=" position: absolute; right: 0px;">ADD</a>
 
-{{-- 
-                    <div class="box-tool">
-                    <ul class="nav">
-                        <li class="nav-item inline">
-                            <a class="btn btn-fw primary" href="{{ route('product.create') }}">
-                                <!-- <i class="brand-icons">&#xe7fe;</i> -->
-                                <i class="far fa-plus-square "></i>
-                                &nbsp; Add New
-                            </a>
-                        </li>
-                    </ul>
-                </div>
- --}}
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+
+
                         {{ Form::open(['method' => 'post', 'id' => 'updateAll']) }}
-                        <div class="bulk-action" style="display: flex; width: 200px;">
-                            <select name="action" id="action" class="form-control c-select w-sm inline v-middle" required>
-                                <option value="no">Action</option>
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                                <option value="2">Delete</option>
-                            </select>
-                            <button type="submit" id="submit_all" class="btn btn-apply">Apply</button>
-                        </div>
+
 
                         <div class="card mb-4 mt-4">
                             {{-- <div class="card-header">
@@ -58,14 +29,14 @@
                                         <table class="table  m-a-0" id="label">
                                             <thead class="dker table-dark">
                                                 <tr>
-                                                    <th class="width20 dker no-sort">
-                                                        <label class="ui-check m-a-0">
-                                                            <input id="checkAll" type="checkbox"><i></i>
-                                                        </label>
-                                                    </th>
+
                                                     <th>Sr No</th>
-                                                    <th>Title </th>
-                                                    <th>Price</th>
+                                                    <th>Order ID</th>
+                                                    <th>RazorPay ID</th>
+                                                    <th>Product ID</th>
+                                                    <th>Amount</th>
+                                                    <th>Start Date</th>
+                                                    <th>Start Time</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -75,7 +46,7 @@
                                         </table>
 
                                     </div>
-                                  {{ Form::close() }}  
+                                  {{ Form::close() }}
                             </div>
                         </div>
 
@@ -86,7 +57,7 @@
 @push("after-scripts")
    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
-      
+
 
 
         $(function() {
@@ -99,7 +70,7 @@
 
             function load_data() {
 
-                var action_url = "{!! route('product.data') !!} ";
+                var action_url = "{!! route('booking.data') !!} ";
 
                 $('#label').DataTable({
                     processing: true,
@@ -109,27 +80,42 @@
                     searching: true,
                     columnDefs: [{
                         'bSortable': false,
-                        'aTargets': [0, 5,4]
+                        'aTargets': [ 8]
                     }],
                     ajax: {
                         url: action_url,
                         type: 'POST',
                     },
-                    columns: [{
-                            data: 'checkbox'
-                        },
+                    columns: [
+
                         {
                             data: 'id',
                             name: 'id',
-                            visible: false
+                            // visible: false
                         },
                         {
-                            data: 'title',
-                            name: 'title'
+                            data: 'order_id',
+                            name: 'order_id'
+                        },
+                        {
+                            data: 'razorpay_id',
+                            name: 'razorpay_id'
+                        },
+                        {
+                            data: 'product_id',
+                            name: 'product_id'
                         },
                         {
                             data: 'price',
                             name: 'price'
+                        },
+                        {
+                            data: 'start_date',
+                            name: 'start_date'
+                        },
+                        {
+                            data: 'start_time',
+                            name: 'start_time'
                         },
                         {
                             data: 'status',
@@ -280,7 +266,7 @@
          function ajaxUpdateAll(csrf, join_selected_values, type) {
             // alert(join_selected_values);
             $.ajax({
-                url: "{{ route('product.updateAll') }}",
+                url: "{{ route('employee.updateAll') }}",
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': csrf

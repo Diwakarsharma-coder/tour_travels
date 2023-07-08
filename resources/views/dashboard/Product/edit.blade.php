@@ -44,20 +44,28 @@
                     <div class="form-group">
                         <strong for="">Location</strong>
                         <input type="text" name="location" id="location" class="form-control" value="{{ $data->location }}">
-                      
+
                     </div>
 
                     <div class="form-group">
                         <strong for="">Day</strong>
                         <input type="Number" name="day" id="day" value="{{ $data->day }}" class="form-control">
-                      
+
                     </div>
 
 
                     <div class="form-group">
                         <strong for="">Person</strong>
                         <input type="Number" value="{{ $data->person }}" name="person" id="person" class="form-control">
-                      
+
+                    </div>
+
+                    <div class="form-group">
+                        <strong for="">Time</strong>
+                        <br>
+                        <label id="time_label" >{{  $data->time }}</label>
+                        <input type="hidden" id="time" name="time" value="{{  $data->time}}">
+                        <input type="time"  name="time_input" id="time_input" class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -77,7 +85,7 @@
                                     <tr>
                                         <input type="hidden" name="price_detail_id[]" value="{{ $val->id }}">
                                         <td class="measurement_box"><input type="text" name="price_title[]" value="{{ $val->price_title }}" class="form-control"></td>
-                                        <td class="measurement_box"><input type="text" name="price_value[]" value="{{ $val->price_value }}" class="form-control"></td>
+                                        <td class="measurement_box"><input type="text" name="price_value[]" onkeypress="return validateNumber(event)" value="{{ $val->price_value }}" class="form-control"></td>
                                         <td class="measurement_box"><input type="text" name="price_desc[]" value="{{ $val->price_desc }}" class="form-control"></td>
                                         @if($i == 0)
 
@@ -85,11 +93,11 @@
                                             <td><input type="button" value="-" class="btn btn-danger" onclick="deleteRow(this)" /></td></tr>
                                         @endif
 
-                                        
-                                    </tr> 
+
+                                    </tr>
                                 @endforeach
-                                
-                                
+
+
                               </tbody>
                             </table>
 
@@ -120,19 +128,19 @@
                     <div class="form-group">
                         <strong for="">Description</strong>
                         <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ $data->description }}</textarea>
-                       
+
                     </div>
                     <div class="form-group">
                             <strong for="">What's Included</strong>
                             <textarea name="included" id="included" cols="30" rows="10" class="form-control">{{ $data->included }}</textarea>
-                           
+
                     </div>
 
 
                      <div class="form-group">
                             <strong for="">What To Expect</strong>
                             <textarea name="expect" id="expect" cols="30" rows="10" class="form-control">{{ $data->expect }}</textarea>
-                           
+
                     </div>
 
                     <div class="form-group">
@@ -174,10 +182,23 @@
 
 @endsection
 @push('after-scripts')
-    
+
   <script src="{{ asset('frontend/js/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_additional-methods.min.js') }}"></script>
 <script src="{{ asset('frontend/js/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_jquery.validate.min.js') }}"></script>
 <script>
+
+    $('#time_input').on('focusout', function(){
+            var value = $(this).val();
+
+            if(value != "")
+            {
+                $('#time_label').append( value+'|');
+                $('#time').val($('#time_label').text());
+            }
+
+        // alert();
+
+    })
 
      $("#add-new-btn").on("click", function(e){
       //calling method to add new row
@@ -188,7 +209,7 @@
      function addNewRow(){
       var rowHtml='<tr>'
       +'<td class="measurement_box"><input class="form-control" name="price_title2[]" type="text" /></td>'
-      +'<td class="measurement_box"><input class="form-control" name="price_value2[]" type="text" /></td>'
+      +'<td class="measurement_box"><input class="form-control" name="price_value2[]" onkeypress="return validateNumber(event)" type="text" /></td>'
       +'<td class="measurement_box"><input class="form-control" name="price_desc2[]" type="text" /></td>'
       +'<td><input type="button" value="-" class="btn btn-danger" onclick="deleteRow(this)" /></td></tr>';
       $(".price_table").append(rowHtml);
@@ -347,7 +368,7 @@
                     }
                 }
             });
-             
+
              CKEDITOR.replace('included', {
                 on: {
                     focus: onFocus,
@@ -375,7 +396,7 @@
 
 
 
-              
+
         </script>
 
 
@@ -427,7 +448,7 @@
    $("#product_service").validate({
             ignore: [],
             rules: {
-                 
+
                 "price_title[]": {
                     length_width_pice:true
                 },
@@ -438,13 +459,13 @@
                     length_width_pice:true
                 },
 
-               
+
             },
             messages: {
-              
-                
-               
-               
+
+
+
+
 
             },
             errorPlacement: function(error, element) {
@@ -458,13 +479,13 @@
             submitHandler: function (form) {
               // console.log('test');
               form.submit();
-                        
+
             }
 
         });
 
-   
 
 
-</script> 
+
+</script>
 @endpush

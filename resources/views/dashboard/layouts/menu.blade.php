@@ -24,6 +24,10 @@
                                 Employee
                             </a>
 
+                             <a class="nav-link" href="{{ route('booking.index') }}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                                Booking Details
+                            </a>
                             <!-- <div class="sb-sidenav-menu-heading">Interface</div> -->
 
 

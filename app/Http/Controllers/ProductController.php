@@ -13,20 +13,24 @@ class ProductController extends Controller
     public function index(){
 
         $data = Product::get();
-        return view('dashboard.product.index', compact('data'));
+        return view('dashboard.Product.index', compact('data'));
 
    }
 
    public function create()
    {
 
-       return view('dashboard.product.create');
+       return view('dashboard.Product.create');
 
    }
 
 
    public function store(Request $request)
    {
+
+    // dd($request->all());
+
+
 
     $validated = $request->validate([
         'title'=>"required",
@@ -69,6 +73,7 @@ class ProductController extends Controller
     $insert->included =$input['included'];
     $insert->expect =$input['expect'];
     $insert->image=   implode("|",$images);
+    $insert->time =$input['time'];
     $insert->save();
 
 
@@ -76,18 +81,18 @@ class ProductController extends Controller
     $price_title = $request->price_title;
     $price_value = $request->price_value;
     $price_desc = $request->price_desc;
-            
+
     // dd($price_title);
     foreach($price_title as $i => $val)
      {
         $new  = new Price_detail();
-        $new->product_id = $insert->id; 
-        $new->price_title = $price_title[$i]; 
-        $new->price_value = $price_value[$i]; 
-        $new->price_desc = $price_desc[$i]; 
+        $new->product_id = $insert->id;
+        $new->price_title = $price_title[$i];
+        $new->price_value = $price_value[$i];
+        $new->price_desc = $price_desc[$i];
         $new->save();
-        
-     }   
+
+     }
 
 
 
@@ -101,7 +106,7 @@ class ProductController extends Controller
 
     $data = Product::find($id);
  $price_detail = Price_detail::where('product_id',$id)->where('status',1)->get();
-    return view('dashboard.product.view', compact('data','price_detail'));
+    return view('dashboard.Product.view', compact('data','price_detail'));
 
    }
 
@@ -112,7 +117,7 @@ class ProductController extends Controller
     $data = Product::find($id);
     $price_detail = Price_detail::where('product_id',$id)->where('status',1)->get();
     // dd($price_detail);
-    return view('dashboard.product.edit', compact('data', 'price_detail'));
+    return view('dashboard.Product.edit', compact('data', 'price_detail'));
 
    }
 
@@ -122,9 +127,9 @@ class ProductController extends Controller
    public function update($id,Request $request)
    {
 
-        
 
-           
+
+
         // dd($request->all());
         // exit;
 
@@ -165,9 +170,9 @@ class ProductController extends Controller
                 echo $val->id;
                 // echo $price_detail_id[$i];
                 $find1 = Price_detail::find($val->id);
-                $find1->status = 2; 
+                $find1->status = 2;
                 $find1->save();
-            } 
+            }
 
             if(!empty($price_detail_id ))
             {
@@ -177,15 +182,15 @@ class ProductController extends Controller
                         // echo $price_detail_id[$i];
                         $find = Price_detail::find($price_detail_id[$i]);
                         // if(!empty($find)){
-                            $find->price_title = $price_title[$i]; 
-                            $find->price_value = $price_value[$i]; 
-                            $find->price_desc = $price_desc[$i]; 
-                            $find->status = 1; 
+                            $find->price_title = $price_title[$i];
+                            $find->price_value = $price_value[$i];
+                            $find->price_desc = $price_desc[$i];
+                            $find->status = 1;
                             $find->save();
-                        // }   
-                    }  
+                        // }
+                    }
             }
-           
+
 
 
             $price_title2 = $request->price_title2;
@@ -198,16 +203,16 @@ class ProductController extends Controller
              {
 
                     $new  = new Price_detail();
-                    $new->product_id = $id; 
-                    $new->price_title = $price_title2[$i]; 
-                    $new->price_value = $price_value2[$i]; 
-                    $new->price_desc = $price_desc2[$i]; 
+                    $new->product_id = $id;
+                    $new->price_title = $price_title2[$i];
+                    $new->price_value = $price_value2[$i];
+                    $new->price_desc = $price_desc2[$i];
                     $new->save();
-             } 
+             }
             }
-            
 
-            
+
+
 
 
             $input=$request->all();
@@ -236,6 +241,7 @@ class ProductController extends Controller
             $insert->included =$input['included'];
             $insert->expect =$input['expect'];
             $insert->image=   $image_data;
+            $insert->time =$input['time'];
             $insert->save();
 
         return  redirect()->route('product.index')->with('success','Update success');
@@ -263,17 +269,17 @@ class ProductController extends Controller
             ->editColumn('title', function ($data) {
 
                 return $data->title;
-              
 
-               
+
+
 
             })
              ->editColumn('price', function ($data) {
 
                 return $data->price;
-              
 
-               
+
+
 
             })
 
@@ -294,12 +300,12 @@ class ProductController extends Controller
             ->editColumn('status', function ($data) {
                 if ($data->status == 1) {
                     return '<button type="button" class="btn btn-success">
-                        <span class="badge  badge-success">Active</span>
+                        <span class="badge  badge-success">Success</span>
                       </button>';
 
                 } else {
                     return '<button type="button" class="btn btn-danger">
-                        <span class="badge  badge-danger">Inactive</span>
+                        <span class="badge  badge-danger">Cancel</span>
                       </button>';
                 }
             })

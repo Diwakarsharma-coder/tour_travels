@@ -8,8 +8,8 @@
        span{
         color: red;
        }
-     </style>   
-       
+     </style>
+
 @section('header-section')
 <div class="container-fluid bg-primary py-5 mb-5 hero-header">
             <div class="container py-5">
@@ -26,7 +26,14 @@
                 </div>
             </div>
         </div>
-@endsection     
+@endsection
+
+
+@if( empty(Session::get('person')) )
+  <p>Something Error</p>
+  <h1>Try now</h1>
+@else
+
 
 
 <!-- content -->
@@ -34,123 +41,11 @@
   <div class="container">
     <div class="row gx-5">
       <aside class="col-lg-6">
-        @php
-          $array = explode("|", $product->image);
-        @endphp
-        <div class="border rounded-4 mb-3 d-flex justify-content-center">
-          <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="{{ asset('product').'/'.$array[0] }}">
-            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ asset('product').'/'.$array[0] }}" />
-          </a>
-        </div>
-        {{-- <div class="d-flex justify-content-center mb-3">
-          @foreach($array as $val)
-          <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="{{ asset('product').'/'.$val }}" class="item-thumb">
-            <img width="60" height="60" class="rounded-2" src="{{ asset('product').'/'.$val }}" />
-          </a>
-          @endforeach
-          
-          
-        </div> --}}
-        <!-- thumbs-wrap.// -->
-        <!-- gallery-wrap .end// -->
-      </aside>
-      <main class="col-lg-6">
-        <div class="ps-lg-3">
-          <h4 class="title text-dark">
-            {{ $product->title }}
-          </h4>
-          {{-- <div class="d-flex flex-row my-3">
-            <div class="text-warning mb-1 me-2">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fas fa-star-half-alt"></i>
-              <span class="ms-1">
-                4.5
-              </span>
-            </div>
-          </div> --}}
-
-          <div class="mb-3">
-            <span class="h5">₹ {{ $product->price }}</span>
-            {{-- <span class="text-muted">/per box</span> --}}
-          </div>
-          
-
-          <p>
-           {{ $product->description }}
-          </p>
-
-          <div class="row">
-            <dt class="col-3">Location:</dt>
-            <dd class="col-9">{{ $product->location }}</dd>
-
-            <dt class="col-3">Person</dt>
-            <dd class="col-9">{{ $product->person }}</dd>
-            <input type="hidden" id="person_hidden" value="{{ $product->person }}">
-
-            <dt class="col-3">Day</dt>
-            <dd class="col-9">{{ $product->day }}</dd>
-
-            {{-- <dt class="col-3">Brand</dt>
-            <dd class="col-9">Reebook</dd> --}}
-          </div>
-
-          <hr />
-            
-           <div class="row mb-4">
-            <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
-             <div class="col-md-4 col-6">
-              <label class="mb-2 d-block">Date</label>
-              <div class="input-group mb-3" style="width: 170px;">
-                <input type="text" name="start_date" id="start_date" class="form-control  border border-secondary" placeholder="Start Date"
-                        value="{{ old('start_date') }}" autocomplete="off">
-              </div>
-               <span id="error_date" style="color:red"></span>
-            </div> 
-            
-            <div class="col-md-4 col-6 mb-3">
-              <label class="mb-2 d-block">Person</label>
-              <div class="input-group mb-3" style="width: 170px;">
-                <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon1" data-mdb-ripple-color="dark">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <input type="text" value="1" id="person_text" onkeypress="return onlyNumberKey(event)" class="form-control text-center border border-secondary" aria-label="Example text with button addon" aria-describedby="button-addon1" />
-                <button class="btn btn-white border border-secondary px-3" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-                  <i class="fas fa-plus"></i>
-                </button>
-              </div>
-             
-            </div> 
-
-          </div> 
-          <a id="booknow"  class="btn btn-primary shadow-0" style="border-radius: 30px 30px 30px 30px;"> Book now </a>
-          
-        </div>
-      </main>
-    </div>
-  </div>
-</section>
-<!-- content -->
-
-<section class="bg-light border-top py-4">
-  <div class="container">
-    <div class="row gx-4">
-      <div class="col-lg-8 mb-4">
-        <div class="border rounded-2 px-3 py-2 bg-white"  id="user_detail" style="display:none">
-          <!-- Pills navs -->
-          <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-            <li class="nav-item d-flex" role="presentation">
-              <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Customer Details</a>
-            </li>
-          </ul>
-          <!-- Pills navs -->
-
-          <!-- Pills content -->
-          <div class="tab-content" id="ex1-content" >
-            <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-               <form method="POST" id="booknow_form">
+        <h4>
+          Contact details
+        </h4>
+        <p>We'll use this information to send you confirmation and updates about your booking</p>
+          <form method="POST" id="booknow_form">
                 @csrf
                             <div class="row g-3">
                                 <div class="col-md-12">
@@ -174,7 +69,7 @@
                                     </div>
                                     <span id="errNm4"></span>
                                 </div>
-                              
+
                                 {{-- <div class="col-md-6">
                                     <div class="form-floating">
                                         <select class="form-select bg-transparent" id="select1">
@@ -186,7 +81,7 @@
                                         <label for="select1">Phone Code</label>
                                     </div>
                                 </div> --}}
-                                <input type="hidden" name="price" value="{{ $product->price }}" id="price">
+
                                   <div class="col-md-12">
                                     <div class="form-floating date" id="date3" data-target-input="nearest">
                                         <input type="text" class="form-control bg-transparent datetimepicker-input" name="phone" id="phone" placeholder="Phone Number"  data-error="#errNm5"/>
@@ -195,14 +90,14 @@
                                     <span id="errNm5"></span>
                                 </div>
 
+                                <hr>
+                                  <h4>
+                                    Pickup point
+                                  </h4>
+                                  <p>Tell us where you’d like to be picked up from. If you're not sure, you can decide later.  </p>
                                  <div class="col-md-12">
-                                    
-                                        <strong>Pickup point</strong>
-                                         <p>Tell us where you’d like to be picked up from. If you're not sure, you can decide later.</p>
-                                        
-                                     
 
-                                        <div class="form-check">
+                                      <div class="form-check">
                                         <input class="form-check-input" type="radio" name="flexRadioDefault" checked value="1" id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                           I’d like to be picked up
@@ -216,228 +111,83 @@
                                          I’ll decide later
                                         </label>
                                       </div>
-                                    
+
                                     <span id="errNm5"></span>
                                 </div>
 
+                                @if($product->guider)
+                                  <div class="col-md-12">
+                                  <label>Select Guide</label>
+                                    <select class="form-select" name="guide" id="guide">
+                                      <option value="1">Frenc- Guide</option>
+                                      <option selected value="2">English- Guide</option>
+                                      <option value="3">German - Guide</option>
+                                      <option value="4">Russian- Guide</option>
+                                    </select>
+                                </div>
+                                @endif
+                                  <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
+                                 <input type="hidden" name="price" value="{{ Session::get('price_id'); }}" id="price">
+                                 <input type="hidden" name="person_text" value="{{ Session::get('person') }}" id="person_text">
+                                 <input type="hidden" name="start_date" id="start_date" value="{{ Session::get('date') }}">
+                                 <input type="hidden" name="start_time" id="start_time" value="{{ Session::get('start_time') }}">
 
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
+                                    <button class="btn btn-primary w-100 py-3" id="paynow" type="submit">Pay Now</button>
                                 </div>
                             </div>
                         </form>
-            </div>
-           
+
+
+      </aside>
+      <main class="col-lg-6">
+          @php
+          $array = explode("|", $product->image);
+        @endphp
+        <div class="border rounded-4 mb-3 d-flex justify-content-center">
+          <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="{{ asset('product').'/'.$array[0] }}">
+            <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ asset('product').'/'.$array[0] }}" />
+          </a>
+        </div>
+        <div class="ps-lg-3">
+          <h4 class="title text-dark">
+            {{ $product->title }}
+          </h4>
+
+
+          <div class="mb-3">
+            <span class="h5">₹ {{ $price }}</span>
           </div>
-          <!-- Pills content -->
+
+
+          <div class="row">
+              <dt class="col-3">Location:</dt>
+              <dd class="col-9">{{ $product->location }}</dd>
+
+              <dt class="col-3">Person</dt>
+              <dd class="col-9">{{ $product->person }}</dd>
+              <input type="hidden" id="person_hidden" value="{{ $product->person }}">
+
+              <dt class="col-3">Day</dt>
+              <dd class="col-9">{{ $product->day }}</dd>
+           </div>
+
         </div>
 
-
-         <div class="border rounded-2 px-3 py-2 bg-white" id="speci">
-          <!-- Pills navs -->
-          <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-            <li class="nav-item d-flex" role="presentation">
-              <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
-            </li>
-          </ul>
-          <!-- Pills navs -->
-
-          <!-- Pills content -->
-          <div class="tab-content" id="ex1-content">
-            <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-              <p>
-                With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur.
-              </p>
-              <div class="row mb-2">
-                <div class="col-12 col-md-6">
-                  <ul class="list-unstyled mb-0">
-                    <li><i class="fas fa-check text-success me-2"></i>Some great feature name here</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Lorem ipsum dolor sit amet, consectetur</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Duis aute irure dolor in reprehenderit</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Optical heart sensor</li>
-                  </ul>
-                </div>
-                <div class="col-12 col-md-6 mb-0">
-                  <ul class="list-unstyled">
-                    <li><i class="fas fa-check text-success me-2"></i>Easy fast and ver good</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Some great feature name here</li>
-                    <li><i class="fas fa-check text-success me-2"></i>Modern style and design</li>
-                  </ul>
-                </div>
-              </div>
-              {{-- <table class="table border mt-3 mb-2">
-                <tr>
-                  <th class="py-2">Display:</th>
-                  <td class="py-2">13.3-inch LED-backlit display with IPS</td>
-                </tr>
-                <tr>
-                  <th class="py-2">Processor capacity:</th>
-                  <td class="py-2">2.3GHz dual-core Intel Core i5</td>
-                </tr>
-                <tr>
-                  <th class="py-2">Camera quality:</th>
-                  <td class="py-2">720p FaceTime HD camera</td>
-                </tr>
-                <tr>
-                  <th class="py-2">Memory</th>
-                  <td class="py-2">8 GB RAM or 16 GB RAM</td>
-                </tr>
-                <tr>
-                  <th class="py-2">Graphics</th>
-                  <td class="py-2">Intel Iris Plus Graphics 640</td>
-                </tr>
-              </table> --}}
-            </div>
-           
-          </div>
-          <!-- Pills content -->
-        </div>
-
-
-
-      </div>
-      <div class="col-lg-4">
-        <div class="px-0 border rounded-2 shadow-0">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Similar items</h5>
-
-              @foreach($awesomePackages as $val)
-                @php
-                  $array = explode("|", $val->image);
-                  @endphp
-
-                    <div class="d-flex mb-3">
-                      <a href="#" class="me-3">
-                        <img src="{{ asset('product').'/'. $array[0] }}" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                      </a>
-                      <div class="info">
-                        <a href="{{ route('product_details',$val->id) }}" class="nav-link mb-1">
-                          {{ $val->title }}
-                        </a>
-                        <strong class="text-dark">₹ {{ $val->price }}</strong>
-                      </div>
-                    </div>
-
-              @endforeach
-              
-            </div>
-          </div>
-        </div>
-      </div>
+      </main>
     </div>
   </div>
 </section>
+<!-- content -->
 
+@endif
 @endsection
 @push("after-scripts")
 
-
-  <script>
-
-    $('#booknow').on('click',function(e){
-e.preventDefault();
-        var start_date = $('#start_date').val()
-        if(start_date == "")
-        {
-          $('#error_date').text('Please Select Date');
-          return false
-        }
-
-        $('#user_detail').css('display',"block");
-        $('#speci').css('display',"none");
-        $('#error_date').text('');
-
-
-
-
-
-      // alert();
-
-
-    })
-
-    var dateToday = new Date();
-
-     $("#start_date").datepicker({
-                format: 'dd-mm-yyyy',
-                orientation: 'bottom',
-               'startDate': dateToday,
-
-            });
-
-
-     $(document).ready(function() { 
-         setCurrentDate()
-      });
-
-      function setCurrentDate()
-      {
-      var now = new Date();
-      var day = ("0" + now.getDate()).slice(-2);
-      var month = ("0" + (now.getMonth() + 1)).slice(-2);
-      var today = (day) + '-' + (month) + "-" + now.getFullYear();
-      $('#start_date').val(today);
-      }
-
-  </script>
-
+<script src="{{ asset('frontend/js/checkout.razorpay.com_v1_checkout.js') }}"></script>
 
 
    <script>
-      $('#button-addon1').on('click',function(){
-          var person_text = parseInt($('#person_text').val());
-          // var person_hidden = $('#person_hidden').val();
-
-          if( person_text == 1)
-          {
-              $(this).prop( "disabled", false );
-          }
-          else
-          {
-            var val = person_text - 1 ;
-              $('#person_text').val(val);
-          }
-
-
-      })
-
-
-      $('#button-addon2').on('click',function(){
-          
-          var person_text = parseInt($('#person_text').val());
-          var person_hidden = parseInt($('#person_hidden').val());
-
-          if( person_hidden == person_text)
-          {
-              $(this).prop( "disabled", false );
-          }
-          else
-          {
-            var val = person_text + 1 ;
-              $('#person_text').val(val);
-          }
-
-      })
-
-      $('#person_text').on('change',function(){
-
-           var person_text = parseInt($(this).val());
-          var person_hidden = parseInt($('#person_hidden').val());
-
-          if( person_text > person_hidden )
-          {
-              $('#person_text').val(person_hidden);
-          }
-
-          if( person_text == 0 )
-          {
-              $('#person_text').val(1);
-          }
-
-      })
 
       function onlyNumberKey(evt) {
             var ASCIICode = (evt.which) ? evt.which : evt.keyCode
@@ -462,7 +212,7 @@ e.preventDefault();
                   maxlength: 12
                 },
                 location:'required'
-               
+
             },
             messages: {
                 start_date:'Please Select Date',
@@ -474,8 +224,8 @@ e.preventDefault();
 
                 },
                 location:'Please Enter Address'
-               
-               
+
+
 
             },
             errorPlacement: function(error, element) {
@@ -495,7 +245,7 @@ e.preventDefault();
                       'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
                   }
               });
-        
+
               var formData = {
                   // date: jQuery('#start_date').val(),
                   start_date:start_date,
@@ -504,41 +254,94 @@ e.preventDefault();
                   first_name: jQuery('#first_name').val(),
                   last_name: jQuery('#last_name').val(),
                   email: jQuery('#email').val(),
-                  price: jQuery('#price').val(),
+                  price_id: jQuery('#price').val(),
                   phone: jQuery('#phone').val(),
                   location: jQuery('#location').val(),
-                  
+                  guide: jQuery('#guide').val(),
+                  start_time: jQuery('#start_time').val(),
+
               };
-        
+
               var ajaxurl = "{!! route('booknow') !!} ";
-        
-              
+
+
+              $('#paynow').prop('disabled',true);
 
                $.ajax({
                   type: 'POST',
                   url: ajaxurl,
                   data: formData,
                   dataType: 'json',
-                  success: function (data) {
-                    var cust_id = data.cust_id;
-                    
-                      if(data.success)
-                      {
-                          var url = "{{ route('success',':id') }}";
-                          var url = url.replace(':id',cust_id);
+                  success: function (result) {
+                    var cust_id = result.cust_id;
+                    console.log(result);
 
-                          window.location.href = url;
+                      if(result.success)
+                      {
+
+
+                        var options = {
+                            "key": "rzp_test_CMs4i82vwHK8pQ",
+                            "amount": result.razorpay_amount / 100,
+                            "currency": "INR",
+                            "name": "Tour My Choice",
+                            "description": "one step solution for your tour booking",
+                            "image": "https://www.itsolutionstuff.com/assets/images/logo-it.png?ezimgfmt=ng:webp/ngcb6",
+                            "order_id": result.razorpay_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                            "handler": function (response){
+
+                                // alert(response.razorpay_payment_id);
+                                // alert();
+                                // alert(response.razorpay_signature);
+
+
+                                var url = "{{ route('success',':id') }}";
+                                var url = url.replace(':id',response.razorpay_order_id);
+
+                                window.location.href = url;
+
+
+                            },
+                            "prefill": {
+                                "name": result.cust_first_name +' '+ result.cust_last_name,
+                                "email": result.email,
+                                "contact": result.phone
+                            },
+                            "notes": {
+                                "address": "Afnan apartment Near Malik Ambar school labar colony Shah bazar Aurangabad, Maharashtra, 431001"
+                            },
+                            "theme": {
+                                "color": "#3399cc"
+                            }
+                        };
+                        var rzp1 = new Razorpay(options);
+                        rzp1.on('payment.failed', function (response){
+                                alert(response.error.code);
+                                alert(response.error.description);
+                                alert(response.error.source);
+                                alert(response.error.step);
+                                alert(response.error.reason);
+                                alert(response.error.metadata.order_id);
+                                alert(response.error.metadata.payment_id);
+                        });
+
+
+
+                         rzp1.open();
+
+
                       }
                       else
                       {
                         alert('Something is wrong')
                       }
 
-                   
+
 
                   },
                   error: function (data) {
                       console.log(data);
+                      alert('error');
                   }
               });
           }
@@ -553,7 +356,7 @@ e.preventDefault();
       $('#errNm8').css('display','Block');
 
     }
-    
+
    });
 
    $('#flexRadioDefault2').on('click',function(){
@@ -566,9 +369,9 @@ e.preventDefault();
 
 
     }
-    
+
    });
 
 
-</script> 
+</script>
 @endpush

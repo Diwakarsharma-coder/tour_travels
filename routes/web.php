@@ -19,13 +19,16 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/',[HomeController::class,'index'])->name('home');
-
-Route::POST('/booking-details/',[HomeController::class,'booking'])->name('booking_details');
+Route::get('product-details/{id}',[HomeController::class,'product_details'])->name('product_details');
 
 Route::get('/booking_details_page/{per}/',[HomeController::class,'booking_details_page'])->name('booking_details_page');
 
 
-Route::get('product-details/{id}',[HomeController::class,'product_details'])->name('product_details');
+Route::POST('/booking-details/',[HomeController::class,'booking'])->name('booking_details');
+
+
+
+
 
 Route::post('/book-now',[HomeController::class,'Book_now'])->name('booknow');
 
@@ -72,6 +75,8 @@ Route::get('/testimonial', function () {
 
 
 
+Route::post('/rating_data',[HomeController::class,'rating'])->name('rating');
+Route::post('/display_rating',[HomeController::class,'display_rating'])->name('display_rating');
 
 
 
@@ -87,14 +92,14 @@ Route::middleware('auth')->group(function () {
 // mlwccoqfjhttcbjp
 
 Route::get('send-mail', function () {
-   
+
     $details = [
         'title' => 'Mail from ItSolutionStuff.com',
         'body' => 'This is for testing email using smtp'
     ];
-   
+
     \Mail::to('diwakarsharma923@gmail.com')->send(new \App\Mail\MyTestMail($details));
-   
+
     dd("Email is Sent.");
 });
 

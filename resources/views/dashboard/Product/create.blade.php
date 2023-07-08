@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.master')
-@section('title','Dashboard')
+@section('title','Product &  Service')
 @push("after-styles")
 
 @endpush
@@ -33,6 +33,8 @@
                                     <input type="text" name="title" id="title" class="form-control">
                             </div>
 
+
+
                             <div class="form-group">
                                     <strong for="">Price</strong>
                                     <input type="text" name="price" id="price" class="form-control" onkeypress="return validateNumber(event)">
@@ -40,22 +42,29 @@
                             <div class="form-group">
                                 <strong for="">Location</strong>
                                 <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}">
-                              
+
                             </div>
 
                             <div class="form-group">
                                 <strong for="">Day</strong>
                                 <input type="Number" name="day" id="day" value="{{ old('day') }}" class="form-control">
-                              
+
                             </div>
 
 
                             <div class="form-group">
                                 <strong for="">Person</strong>
                                 <input type="Number" value="{{ old('person') }}" name="person" id="person" class="form-control">
-                              
+
                             </div>
 
+                            <div class="form-group">
+                                <strong for="">Time</strong>
+                                <br>
+                                <label id="time_label" ></label>
+                                <input type="hidden" id="time" name="time" value="">
+                                <input type="time"  name="time_input" id="time_input" class="form-control">
+                            </div>
 
                             <div class="form-group">
                                     <strong for="">Price </strong>
@@ -72,10 +81,10 @@
                                   <tbody>
                                         <tr>
                                             <td class="measurement_box"><input type="text" name="price_title[]" value="{{ old('price_title[]') }}" class="form-control"></td>
-                                            <td class="measurement_box"><input type="text" name="price_value[]" value="{{ old('price_value[]') }}" class="form-control"></td>
+                                            <td class="measurement_box"><input type="text" name="price_value[]" value="{{ old('price_value[]') }}" onkeypress="return validateNumber(event)"  class="form-control"></td>
                                             <td class="measurement_box"><input type="text" name="price_desc[]" value="{{ old('price_desc[]') }}" class="form-control"></td>
                                         </tr>
-                                    
+
                                   </tbody>
                                 </table>
 
@@ -105,20 +114,20 @@
                             <div class="form-group">
                                     <strong for="">Description</strong>
                                     <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
-                                   
+
                             </div>
 
                             <div class="form-group">
                                     <strong for="">What's Included</strong>
                                     <textarea name="included" id="included" cols="30" rows="10" class="form-control"></textarea>
-                                   
+
                             </div>
 
 
                              <div class="form-group">
                                     <strong for="">What To Expect</strong>
                                     <textarea name="expect" id="expect" cols="30" rows="10" class="form-control"></textarea>
-                                   
+
                             </div>
 
 
@@ -129,7 +138,7 @@
                             </div>
 
 
-                             
+
 
 
                             <div class="form-group">
@@ -154,11 +163,19 @@
 
 @endsection
 @push("after-scripts")
-  
+
   <script src="{{ asset('frontend/js/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_additional-methods.min.js') }}"></script>
 <script src="{{ asset('frontend/js/cdnjs.cloudflare.com_ajax_libs_jquery-validate_1.19.5_jquery.validate.min.js') }}"></script>
 <script>
 
+    $('#time_input').on('focusout', function(){
+            var value = $(this).val();
+            $('#time_label').append( value+'|');
+
+            $('#time').val($('#time_label').text());
+        // alert();
+
+    })
      $("#add-new-btn").on("click", function(e){
       //calling method to add new row
         e.preventDefault();
@@ -168,7 +185,7 @@
      function addNewRow(){
       var rowHtml='<tr>'
       +'<td class="measurement_box"><input class="form-control" name="price_title[]" type="text" /></td>'
-      +'<td class="measurement_box"><input class="form-control" name="price_value[]" type="text" /></td>'
+      +'<td class="measurement_box"><input class="form-control" name="price_value[]" onkeypress="return validateNumber(event)" type="text" /></td>'
       +'<td class="measurement_box"><input class="form-control" name="price_desc[]" type="text" /></td>'
       +'<td><input type="button" value="-" class="btn btn-danger" onclick="deleteRow(this)" /></td></tr>';
       $(".price_table").append(rowHtml);
@@ -350,7 +367,7 @@
                     }
                 }
             });
-             
+
         </script>
 
  <script>
@@ -401,7 +418,7 @@
    $("#product_service").validate({
             ignore: [],
             rules: {
-                 
+
                 "price_title[]": {
                     length_width_pice:true
                 },
@@ -412,13 +429,13 @@
                     length_width_pice:true
                 },
 
-               
+
             },
             messages: {
-              
-                
-               
-               
+
+
+
+
 
             },
             errorPlacement: function(error, element) {
@@ -432,13 +449,13 @@
             submitHandler: function (form) {
               // console.log('test');
               form.submit();
-                        
+
             }
 
         });
 
-   
 
 
-</script> 
+
+</script>
 @endpush

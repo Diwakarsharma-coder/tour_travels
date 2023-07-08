@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\bookingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
@@ -82,6 +83,16 @@ Route::get('employee/delete/{id}',[EmployeeController::class,'delete'])->name('e
 Route::POST('employee/anydata',[EmployeeController::class,'anyData'])->name('employee.data');
 
 Route::post('employee/updateAll', [EmployeeController::class, 'EmployeeStatusUpdate'])->name('employee.updateAll');
+
+
+
+
+Route::get('booking',[bookingController::class,'index'])->name('booking.index');
+
+Route::get('booking/view/{id}',[bookingController::class,'view'])->name('booking.view');
+Route::POST('booking/anydata',[bookingController::class,'anyData'])->name('booking.data');
+
+
 
 
 Route::get('customer',[CustomerController::class,'index'])->name('customer.index');

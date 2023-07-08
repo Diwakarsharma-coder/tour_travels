@@ -28,21 +28,35 @@
                             <div class="form-group">
                                 <strong for="">Location</strong>
                                 <input disabled type="text" name="location" id="location" class="form-control" value="{{ $data->location }}">
-                              
+
                             </div>
 
                             <div class="form-group">
                                 <strong for="">Day</strong>
                                 <input disabled type="Number" name="day" id="day" value="{{ $data->day }}" class="form-control">
-                              
+
                             </div>
 
 
                             <div class="form-group">
                                 <strong for="">Person</strong>
                                 <input disabled type="Number" value="{{ $data->person }}" name="person" id="person" class="form-control">
-                              
+
                             </div>
+
+                            <div class="form-group">
+                                <strong for="">Time</strong>
+                                <br>
+                                @php
+                                     $array = explode("|", $data->time);
+                                @endphp
+                                @foreach ($array as $val)
+                                <label id="time_label" class="border bg-secondary text-white p-1" >{{ $val }}</label>
+
+                                @endforeach
+
+                            </div>
+
 
                              <div class="form-group">
                         <strong for="">Price</strong>
@@ -63,13 +77,13 @@
                                         <td class="measurement_box"><input type="text" disabled name="price_title[]" value="{{ $val->price_title }}" class="form-control"></td>
                                         <td class="measurement_box"><input type="text" disabled name="price_value[]" value="{{ $val->price_value }}" class="form-control"></td>
                                         <td class="measurement_box"><input type="text" disabled name="price_desc[]" value="{{ $val->price_desc }}" class="form-control"></td>
-                                       
 
-                                        
-                                    </tr> 
+
+
+                                    </tr>
                                 @endforeach
-                                
-                                
+
+
                               </tbody>
                             </table>
 
@@ -105,14 +119,14 @@
                             <div class="form-group">
                             <strong for="">What's Included</strong>
                             <p> {!! htmlspecialchars_decode(stripslashes($data->included)) !!}</p>
-                           
+
                     </div>
 
 
                      <div class="form-group">
                             <strong for="">What To Expect</strong>
                             <p> {!! htmlspecialchars_decode(stripslashes($data->expect)) !!}</p>
-                           
+
                     </div>
 
 
